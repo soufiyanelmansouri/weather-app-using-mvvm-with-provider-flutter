@@ -1,4 +1,4 @@
-# Wether app
+#Weather  app
 
 Flutter weather app with mvvm architecture using provider
 
