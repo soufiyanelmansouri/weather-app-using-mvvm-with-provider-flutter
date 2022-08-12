@@ -10,11 +10,10 @@ class WeatherViewModel extends BaseViewModel {
   dynamic weather;
   String error = '';
 
-  Future<WeatherModel> getWeatherForCity(String city) async {
+  Future<void> getWeatherCity(String city) async {
     if (callOnModelready) {
       setState(true);
-      var rawWeatherData = await weatherApi.getdataFromJsonForACity(city);
-      weather = WeatherModel.fromJson(rawWeatherData ?? '');
+      weather = await weatherApi.getCitydataFromJson(city);
       setState(false);
       callOnModelready = false;
     }
@@ -23,20 +22,14 @@ class WeatherViewModel extends BaseViewModel {
 
   Future<WeatherModel> serchForCity(String city) async {
     setsecondState(true);
-    var rawWeatherData = await weatherApi.getdataFromJsonForACity(city);
-    weather = WeatherModel.fromJson(rawWeatherData ?? '');
+    weather = await weatherApi.getCitydataFromJson(city);
     setsecondState(false);
     return weather;
   }
 
-  Future<WeatherModel> getRawWeatherFromCurrentLocation(
-    double lat,
-    double lon,
-  ) async {
+  Future<void> getRawWeatherFromCurrentLocation(double lat, double lon) async {
     setState(true);
-    var rawWeatherData =
-        await weatherApi.getdataFromJsonForALocation(lat: lat, lon: lon);
-    weather = WeatherModel.fromJson(rawWeatherData);
+    weather = await weatherApi.getLocationdataFromJson(lat: lat, lon: lon);
     error = '';
     setState(false);
     return weather;

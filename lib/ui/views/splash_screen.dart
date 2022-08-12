@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
       var box = Hive.box('myBox');
       var theme = box.get('theme');
       if (theme == null) {
-        debugPrint(theme);
         await box.put('theme', true);
       }
     });
@@ -31,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Baseview<WeatherViewModel>(
         dispose: false,
         onModelready: (init) async {
-          init.getWeatherForCity('london');
+          init.getWeatherCity('london');
         },
         builder: (context, model, child) {
           return model.state

@@ -12,12 +12,12 @@ class WeatherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context).box.get('theme');
+    final color = Provider.of<ThemeProvider>(context).box.get('theme');
     return Baseview<WeatherViewModel>(
       dispose: false,
       builder: (context, model, child) => SafeArea(
         child: Scaffold(
-          backgroundColor: theme ? backgroundColorDark : backgroundColorLight,
+          backgroundColor: color ? backgroundColorDark : backgroundColorLight,
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -42,7 +42,7 @@ class WeatherView extends StatelessWidget {
                       child: Text(
                         model.weather.cityName,
                         style: TextStyle(
-                            color: theme ? Colors.white : Colors.black,
+                            color: color ? Colors.white : Colors.black,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold),
                       ),
@@ -53,7 +53,7 @@ class WeatherView extends StatelessWidget {
                       width: 80,
                       decoration: BoxDecoration(
                         color:
-                            theme ? foorgroundColorDark : backgroundColorDark,
+                            color ? foorgroundColorDark : backgroundColorDark,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -92,13 +92,13 @@ class WeatherView extends StatelessWidget {
                 Text(
                   'Today\'s Report',
                   style: TextStyle(
-                    color: theme ? Colors.white : Colors.black,
+                    color: color ? Colors.white : Colors.black,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 WeatherInfo(
-                  theme: theme,
+                  theme: color,
                   imageUrl:
                       'http://openweathermap.org/img/wn/${model.weather.weather[0].icon}@2x.png',
                   description: model.weather.weather[0].description,
@@ -109,19 +109,19 @@ class WeatherView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     WeatherWidget(
-                      theme: theme,
+                      theme: color,
                       image: 'assets/icons/humidity.png',
                       text: model.weather.temp.humidity.toString(),
                       secondText: 'Humidity',
                     ),
                     WeatherWidget(
-                      theme: theme,
+                      theme: color,
                       image: 'assets/icons/speed.png',
                       text: model.weather.wind.speed.toString(),
                       secondText: """WSW\nWind Speed""",
                     ),
                     WeatherWidget(
-                      theme: theme,
+                      theme: color,
                       image: 'assets/icons/visibility.png',
                       text: '${(model.weather.visibility / 1000)}Km',
                       secondText: 'Visibility',
